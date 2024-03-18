@@ -1,11 +1,14 @@
 
 #!/bin/bash
 
+. colors.sh
 
-$(pwd)='$(pwd)'
+
+downloadDir='$(pwd)'
 
 if [[ ! -e /etc/apt/preferences.d/cuda-repository-pin-600 ]]; then
-    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin -O $(pwd)
+    downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin -O $downloadPath
     sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 fi
 
@@ -14,7 +17,7 @@ fi
 installed=`dpkg -s cuda-repo-ubuntu1804-11-8-local | grep 'Status: .* ok installed' | wc -l`
 if [[ $installed == 0 ]]; then
 
-    downloadPath=./driver/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
+    downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
     if [[ ! -e ${downloadPath} ]]; then
         wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb -O ${downloadPath}
         # sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -59,7 +62,7 @@ fi
 # # pip uninstall onnxruntime onnxruntime-gpu
 # # pip install onnxruntime-gpu==1.15.1
 
-. sh/colors.sh
+
 
 
 # installed=`cat /usr/local/cuda/version.json | grep 11.8.0 | wc -l`
@@ -77,7 +80,9 @@ if [[ $installed == 0 ]]; then
 
     echo "${YELLOW}检查cudnn${NOCOLOR}"
     downloadUrl=https://tokshow-1315251136.cos.ap-hongkong.myqcloud.com/driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb
-    downloadPath=driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb 
+    # downloadPath=driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb 
+    downloadPath=${downloadDir}/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb
+
     if [[ -e $downloadPath ]]; then
         echo "${YELLOW}$downloadPath 已经存在${NOCOLOR}"
     else
