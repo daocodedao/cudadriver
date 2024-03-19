@@ -9,7 +9,7 @@ downloadDir=$PARENT_SRCDIR/drivers
 
 echo $downloadDir
 
-echo "check cuda-repository-pin-600"
+echo "${YELLOW}check cuda-repository-pin-600${NOCOLOR}"
 if [[ ! -e /etc/apt/preferences.d/cuda-repository-pin-600 ]]; then
     downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin -O $downloadPath
@@ -17,7 +17,7 @@ if [[ ! -e /etc/apt/preferences.d/cuda-repository-pin-600 ]]; then
 fi
 
 
-echo "check cuda-repo-ubuntu1804-11-8-local"
+echo "${YELLOW}check cuda-repo-ubuntu1804-11-8-local${NOCOLOR}"
 installed=`dpkg -s cuda-repo-ubuntu1804-11-8-local | grep 'Status: .* ok installed' | wc -l`
 if [[ $installed == 0 ]]; then
     downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
@@ -34,7 +34,7 @@ if [[ $installed == 0 ]]; then
     echo -e "${YELLOW}cuda intall done${NOCOLOR}"
 fi
 
-echo "check cudnn"
+echo "${YELLOW}check cudnn${NOCOLOR}"
 installed=`dpkg -s cudnn-local-repo-ubuntu1804-8.9.3.28 | grep 'Status: .* ok installed' | wc -l`
 if [[ $installed == 0 ]]; then
     downloadUrl=https://tokshow-1315251136.cos.ap-hongkong.myqcloud.com/driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb
@@ -70,34 +70,3 @@ fi
 #     sudo apt install -y cuda-11-8
 # fi
 
-
-
-installed=`dpkg -s cudnn-local-repo-ubuntu1804-8.9.3.28 | grep 'Status: .* ok installed' | wc -l`
-if [[ $installed == 0 ]]; then
-
-    echo "${YELLOW}检查cudnn${NOCOLOR}"
-    downloadUrl=https://tokshow-1315251136.cos.ap-hongkong.myqcloud.com/driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb
-    # downloadPath=driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb 
-    downloadPath=${downloadDir}/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb
-
-    if [[ -e $downloadPath ]]; then
-        echo "${YELLOW}$downloadPath 已经存在${NOCOLOR}"
-    else
-        echo "${YELLOW}wget ${downloadUrl} ${NOCOLOR}"
-        wget ${downloadUrl} -O ${downloadPath}
-        # sudo apt-get install ${downloadPath}
-    fi
-
-
-    echo -e "${YELLOW}cudnn intalling${NOCOLOR}"
-    # sudo apt-get install ${downloadPath}
-    sudo dpkg -i ${downloadPath}
-    sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/
-    sudo apt-get update
-    sudo apt-get install libcudnn8=8.9.3.28-1+cuda11.8
-    sudo apt-get install libcudnn8-dev=8.9.3.28-1+cuda11.8
-
-
-
-    echo -e "${YELLOW}cudnn intall done${NOCOLOR}"
-fi
