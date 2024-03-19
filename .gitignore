@@ -1,0 +1,11 @@
+.idea/
+bin/
+core/__pycache__/
+__pycache__/
+venv*/
+worker_data/
+processed/
+processed_labeled/
+out/
+drivers/
+logs/

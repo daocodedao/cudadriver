@@ -4,32 +4,32 @@
 . colors.sh
 
 
-downloadDir='$(pwd)'
+# downloadDir='$(pwd)'
 
-if [[ ! -e /etc/apt/preferences.d/cuda-repository-pin-600 ]]; then
-    downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
-    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin -O $downloadPath
-    sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-fi
+# if [[ ! -e /etc/apt/preferences.d/cuda-repository-pin-600 ]]; then
+#     downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
+#     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin -O $downloadPath
+#     sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+# fi
 
 
 
-installed=`dpkg -s cuda-repo-ubuntu1804-11-8-local | grep 'Status: .* ok installed' | wc -l`
-if [[ $installed == 0 ]]; then
+# installed=`dpkg -s cuda-repo-ubuntu1804-11-8-local | grep 'Status: .* ok installed' | wc -l`
+# if [[ $installed == 0 ]]; then
 
-    downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
-    if [[ ! -e ${downloadPath} ]]; then
-        wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb -O ${downloadPath}
-        # sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-    fi
+#     downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
+#     if [[ ! -e ${downloadPath} ]]; then
+#         wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb -O ${downloadPath}
+#         # sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+#     fi
 
-    echo -e "${YELLOW}cuda intalling${NOCOLOR}"
-    sudo dpkg -i ${downloadPath}
-    sudo cp /var/cuda-repo-ubuntu1804-11-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
-    sudo apt-get update
-    sudo apt-get -y install cuda
-    echo -e "${YELLOW}cuda intall done${NOCOLOR}"
-fi
+#     echo -e "${YELLOW}cuda intalling${NOCOLOR}"
+#     sudo dpkg -i ${downloadPath}
+#     sudo cp /var/cuda-repo-ubuntu1804-11-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+#     sudo apt-get update
+#     sudo apt-get -y install cuda
+#     echo -e "${YELLOW}cuda intall done${NOCOLOR}"
+# fi
 
 # echo "检查cudnn"
 # downloadUrl=https://tokshow-1315251136.cos.ap-hongkong.myqcloud.com/driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb
@@ -65,13 +65,13 @@ fi
 
 
 
-# installed=`cat /usr/local/cuda/version.json | grep 11.8.0 | wc -l`
-# if [[ $installed == 0 ]]; then
-#     sudo apt purge -y nvidia* libnvidia*
-#     sudo apt autoremove -y
-#     sudo apt install -y nvidia-driver-520
-#     sudo apt install -y cuda-11-8
-# fi
+installed=`cat /usr/local/cuda/version.json | grep 11.8.0 | wc -l`
+if [[ $installed == 0 ]]; then
+    sudo apt purge -y nvidia* libnvidia*
+    sudo apt autoremove -y
+    sudo apt install -y nvidia-driver-520
+    sudo apt install -y cuda-11-8
+fi
 
 
 
