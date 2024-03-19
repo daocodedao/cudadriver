@@ -3,6 +3,10 @@
 
 SRCDIR=`pwd`
 PARENT_SRCDIR=$(dirname "$(pwd)")
+
+echo $SRCDIR
+echo $PARENT_SRCDIR
+
 . ${SRCDIR}/colors.sh
 
 . readServer.sh $1
