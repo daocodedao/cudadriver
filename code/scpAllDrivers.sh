@@ -22,7 +22,7 @@ echo -e
 echo -e
 echo "${YELLOW}$i${NOCOLOR}"
 ssh $i mkdir -p ${PARENT_SRCDIR}
-scp -r ${PARENT_SRCDIR}/dirvers/ fxbox@$i:${PARENT_SRCDIR}/roop/cudadriver
+scp -r ${PARENT_SRCDIR}/drivers/ fxbox@$i:${PARENT_SRCDIR}/roop/cudadriver
 
 fi
 
