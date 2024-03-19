@@ -1,5 +1,5 @@
 #!/bin/bash
-# 拷贝代码到所有机器
+# copy code to all machine
 
 SRCDIR=`pwd`
 PARENT_SRCDIR=$(dirname "$(pwd)")

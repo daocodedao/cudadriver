@@ -58,10 +58,6 @@ if [[ $installed == 0 ]]; then
 fi
 
 
-
-
-
-
 # installed=`cat /usr/local/cuda/version.json | grep 11.8.0 | wc -l`
 # if [[ $installed == 0 ]]; then
 #     sudo apt purge -y nvidia* libnvidia*

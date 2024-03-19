@@ -1,5 +1,5 @@
 #!/bin/bash
-# 拷贝驱动到所有机器
+# copy drivers to all machine
 
 SRCDIR=`pwd`
 PARENT_SRCDIR=$(dirname "$(pwd)")
