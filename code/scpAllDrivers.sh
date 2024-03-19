@@ -1,6 +1,8 @@
 #!/bin/bash
 # 拷贝python环境到所有机器
 
+SRCDIR=`pwd`
+PARENT_SRCDIR=$(dirname "$(pwd)")
 
 . ${SRCDIR}/colors.sh
 
@@ -16,8 +18,8 @@ echo -e
 echo -e
 echo -e
 echo "${YELLOW}$i${NOCOLOR}"
-ssh $i mkdir -p ${SRCDIR}
-scp -r ${SRCDIR}/dirvers/ fxbox@$i:${SRCDIR}/roop/cudadriver
+ssh $i mkdir -p ${PARENT_SRCDIR}
+scp -r ${PARENT_SRCDIR}/dirvers/ fxbox@$i:${PARENT_SRCDIR}/roop/cudadriver
 
 fi
 

@@ -2,6 +2,7 @@
 # 拷贝代码到所有机器
 
 SRCDIR=`pwd`
+PARENT_SRCDIR=$(dirname "$(pwd)")
 . ${SRCDIR}/colors.sh
 
 . readServer.sh $1
@@ -13,6 +14,6 @@ echo -e
 echo -e
 echo "${YELLOW}$i${NOCOLOR}"
 ssh $i mkdir -p ${SRCDIR}
-scp -r ${SRCDIR} fxbox@$i:/data/work
+scp -r ${SRCDIR} fxbox@$i:$PARENT_SRCDIR
 
 done;
