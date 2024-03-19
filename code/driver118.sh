@@ -71,3 +71,4 @@ fi
 #     sudo apt install -y cuda-11-8
 # fi
 
+echo "Completed install driver! Need handl reboot!"
