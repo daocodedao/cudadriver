@@ -9,7 +9,7 @@ downloadDir=$PARENT_SRCDIR/drivers
 
 echo $downloadDir
 
-
+echo "check cuda-repository-pin-600"
 if [[ ! -e /etc/apt/preferences.d/cuda-repository-pin-600 ]]; then
     downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin -O $downloadPath
@@ -17,10 +17,9 @@ if [[ ! -e /etc/apt/preferences.d/cuda-repository-pin-600 ]]; then
 fi
 
 
-
+echo "check cuda-repo-ubuntu1804-11-8-local"
 installed=`dpkg -s cuda-repo-ubuntu1804-11-8-local | grep 'Status: .* ok installed' | wc -l`
 if [[ $installed == 0 ]]; then
-
     downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
     if [[ ! -e ${downloadPath} ]]; then
         wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb -O ${downloadPath}
@@ -35,19 +34,19 @@ if [[ $installed == 0 ]]; then
     echo -e "${YELLOW}cuda intall done${NOCOLOR}"
 fi
 
-echo "检查cudnn"
-downloadUrl=https://tokshow-1315251136.cos.ap-hongkong.myqcloud.com/driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb
-downloadPath=driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb 
-if [[ -e $downloadPath ]]; then
-    echo "$downloadPath 已经存在"
-else
-    echo "${YELLOW}wget ${downloadUrl} ${NOCOLOR}"
-    wget ${downloadUrl} -O ${downloadPath}
-    sudo apt-get install ${downloadPath}
-fi
-
+echo "check cudnn"
 installed=`dpkg -s cudnn-local-repo-ubuntu1804-8.9.3.28 | grep 'Status: .* ok installed' | wc -l`
 if [[ $installed == 0 ]]; then
+    downloadUrl=https://tokshow-1315251136.cos.ap-hongkong.myqcloud.com/driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb
+    downloadPath=driver/cudnn-local-repo-ubuntu1804-8.9.3.28_1.0-1_amd64.deb 
+    if [[ -e $downloadPath ]]; then
+        echo "$downloadPath exist"
+    else
+        echo "${YELLOW}download ${downloadUrl} ${NOCOLOR}"
+        wget ${downloadUrl} -O ${downloadPath}
+        sudo apt-get install ${downloadPath}
+    fi
+
     echo -e "${YELLOW}cudnn intalling${NOCOLOR}"
     # sudo apt-get install ${downloadPath}
     sudo dpkg -i ${downloadPath}
