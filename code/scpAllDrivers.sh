@@ -1,5 +1,5 @@
 #!/bin/bash
-# 拷贝python环境到所有机器
+# 拷贝驱动到所有机器
 
 SRCDIR=`pwd`
 PARENT_SRCDIR=$(dirname "$(pwd)")
