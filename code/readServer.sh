@@ -1,11 +1,11 @@
 #!/bin/bash
 
 
-SVRLIST=`cat mgr/aisvrlistAll.txt`
+SVRLIST=`cat aisvrlistAll.txt`
 if [[ $1 == "single" ]]; then
-SVRLIST=`cat mgr/aisvrlistSingle.txt`
+SVRLIST=`cat aisvrlistSingle.txt`
 elif  [[ $1 == "group1" ]]; then
-SVRLIST=`cat mgr/aisvrlistGroup1.txt`
+SVRLIST=`cat aisvrlistGroup1.txt`
 elif  [[ $1 == "group2" ]]; then
-SVRLIST=`cat mgr/aisvrlistGroup2.txt`
+SVRLIST=`cat aisvrlistGroup2.txt`
 fi
