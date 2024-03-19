@@ -57,6 +57,9 @@ if [[ $installed == 0 ]]; then
     echo -e "${YELLOW}cudnn intall done${NOCOLOR}"
 fi
 
+echo "${YELLOW}nvcc path${NOCOLOR}"
+PATH=/usr/local/cuda/bin:$PATH
+
 #remove all driver
 #sudo apt purge -y nvidia* libnvidia*
 #sudo apt autoremove -y
