@@ -57,6 +57,11 @@ if [[ $installed == 0 ]]; then
     echo -e "${YELLOW}cudnn intall done${NOCOLOR}"
 fi
 
+#remove all driver
+#sudo apt purge -y nvidia* libnvidia*
+#sudo apt autoremove -y
+#sudo apt-get update
+
 
 # installed=`cat /usr/local/cuda/version.json | grep 11.8.0 | wc -l`
 # if [[ $installed == 0 ]]; then
