@@ -12,7 +12,9 @@ echo $downloadDir
 echo "${YELLOW}check cuda-repository-pin-600${NOCOLOR}"
 if [[ ! -e /etc/apt/preferences.d/cuda-repository-pin-600 ]]; then
     downloadPath=${downloadDir}/cuda-repository-pin-600
-    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin -O $downloadPath
+    if [[ ! -e ${downloadPath} ]]; then
+        wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin -O $downloadPath
+    fi
     echo "sudo cp ${downloadPath} /etc/apt/preferences.d/cuda-repository-pin-600"
     sudo cp ${downloadPath} /etc/apt/preferences.d/cuda-repository-pin-600
 fi
@@ -24,7 +26,6 @@ if [[ $installed == 0 ]]; then
     downloadPath=${downloadDir}/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb 
     if [[ ! -e ${downloadPath} ]]; then
         wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-ubuntu1804-11-8-local_11.8.0-520.61.05-1_amd64.deb -O ${downloadPath}
-        # sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
     fi
 
     echo -e "${YELLOW}cuda intalling${NOCOLOR}"
